@@ -13,6 +13,17 @@
 #include <opencv2/highgui/highgui.hpp>
 
 using namespace std;
+void check_button_clicked( sf::Vector2f position ) {
+	if(150<position.x and position.x<350 and 200<position.y and position.y<250){
+		cout<<"Index Folder \n"; //aqui podria poner la funcion respectiva de indexar folder
+	}
+	else if(150<position.x and position.x<350 and 310<position.y and position.y<360){
+		cout<<"Load Video\n";//aqui podria poner la funcion respectiva de cargar video
+	}
+	else if(150<position.x and position.x<350 and 420<position.y and position.y<470){
+		cout<<"Play Video \n";//aqui podria poner la funcion respectiva de reproducir video
+	}
+}
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(500,500), "TECMFS");
@@ -66,29 +77,17 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		{
-			if (!pressed){
-				position = sf::Mouse::getPosition(window);
 
-				if(150<position.x and position.x<350 and 200<position.y and position.y<250){
-					cout<<"Index Folder \n"; //aqui podria poner la funcion respectiva de indexar folder
-					pressed=true;
-					continue;
-				}
-				if(150<position.x and position.x<350 and 310<position.y and position.y<360){
-					cout<<"Load Video\n";//aqui podria poner la funcion respectiva de cargar video
-					pressed=true;
-					continue;
-				}
-				if(150<position.x and position.x<350 and 420<position.y and position.y<470){
-					cout<<"Play Video \n";//aqui podria poner la funcion respectiva de reproducir video
-					pressed=true;
-					continue;
-				}
-
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+			if(!pressed){
+				sf::Vector2i mouse_pos = sf::Mouse::getPosition( window );
+				sf::Vector2f mouse_pos_f( static_cast<float>( mouse_pos.x ), static_cast<float>( mouse_pos.y ) );
+				check_button_clicked( mouse_pos_f );
+				pressed=true;
+				continue;
 			}
-		}  else {
+		}
+		else {
 			pressed=false;
 		}
 
